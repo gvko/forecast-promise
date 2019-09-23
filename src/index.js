@@ -2,49 +2,49 @@ const axios = require('axios');
 const stringifyDates = require('./stringifyDates');
 
 class Forecast {
-	constructor({ accountId, token } = {}, instance) {
-		if (!accountId || !token) {
-			throw new Error(
-				'Forecast module requires accountId and token to be configured.',
-			);
-		}
+  constructor({ accountId, token } = {}, instance) {
+    if (!accountId || !token) {
+      throw new Error(
+        'Forecast module requires accountId and token to be configured.',
+      );
+    }
 
-		const baseURL = 'https://api.harvestapp.com/api/v2/';
-		const headers = {
-			Authorization: `Bearer ${token}`,
-			'Forecast-Account-Id': accountId,
-			'User-Agent': 'https://www.npmjs.com/package/forecast-promise',
-		};
+    const baseURL = 'https://api.harvestapp.com/api/v2/';
+    const headers = {
+      Authorization: `Bearer ${token}`,
+      'Forecast-Account-Id': accountId,
+      'User-Agent': 'https://www.npmjs.com/package/forecast-promise',
+    };
 
-		this.instance =
-			instance ||
-			axios.create({
-				baseURL,
-				headers,
-			});
+    this.instance =
+      instance ||
+      axios.create({
+        baseURL,
+        headers,
+      });
 
-		const methods = [
-			['whoAmI', 'current_user'],
-			['clients'],
-			['people'],
-			['projects'],
-			['assignments'],
-			['milestones'],
-			['roles'],
-		];
+    const methods = [
+      ['whoAmI', 'current_user'],
+      ['clients'],
+      ['people'],
+      ['projects'],
+      ['assignments'],
+      ['milestones'],
+      ['roles'],
+    ];
 
-		methods.forEach(([name, dataLocation]) => {
-			const route = '/' + name.toLowerCase();
-			const prop = dataLocation || name;
-			this[name] = options =>
-				this._request(route, options).then(response => response.data[prop]);
-		});
-	}
+    methods.forEach(([name, dataLocation]) => {
+      const route = '/' + name.toLowerCase();
+      const prop = dataLocation || name;
+      this[name] = options =>
+        this._request(route, options).then(response => response.data[prop]);
+    });
+  }
 
-	_request(relativeUrl, options = {}) {
-		const params = stringifyDates(options);
-		return this.instance.get(relativeUrl, { params });
-	}
+  _request(relativeUrl, options = {}) {
+    const params = stringifyDates(options);
+    return this.instance.get(relativeUrl, { params });
+  }
 }
 
 module.exports = Forecast;
