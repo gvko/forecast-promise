@@ -5,7 +5,7 @@ class Forecast {
 	constructor({ accountId, token } = {}, instance) {
 		if (!accountId || !token) {
 			throw new Error(
-				'Forecast module requires accountId and token to be configured.'
+				'Forecast module requires accountId and token to be configured.',
 			);
 		}
 

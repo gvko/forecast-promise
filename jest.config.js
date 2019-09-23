@@ -1,5 +1,5 @@
 /* global module */
 module.exports = {
-	testEnvironment: 'node',
-	collectCoverageFrom: ['src/**/*.js'],
+  testEnvironment: 'node',
+  collectCoverageFrom: ['src/**/*.js'],
 };

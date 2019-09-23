@@ -1,17 +1,30 @@
 {
-	"parserOptions": {
-		"ecmaVersion": 2018,
-		"sourceType": "module"
-	},
-	"env": {
-		"node": true,
-		"jest": true
-	},
-	"plugins": ["prettier"],
-	"extends": ["eslint:recommended", "prettier"],
-	"rules": {
-		"prettier/prettier": "error",
-		"linebreak-style": ["error", "unix"],
-		"no-unused-vars": ["error", { "ignoreRestSiblings": true }]
-	}
+  "parserOptions": {
+    "ecmaVersion": 2018,
+    "sourceType": "module"
+  },
+  "env": {
+    "node": true,
+    "jest": true
+  },
+  "plugins": [
+    "prettier"
+  ],
+  "extends": [
+    "eslint:recommended",
+    "prettier"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "no-unused-vars": [
+      "error",
+      {
+        "ignoreRestSiblings": true
+      }
+    ]
+  }
 }
