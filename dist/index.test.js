@@ -1,77 +1,44 @@
 'use strict';
 
-function _defineProperty(obj, key, value) {
-  if (key in obj) {
-    Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });
-  } else {
-    obj[key] = value;
-  }
-  return obj;
-}
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-function _asyncToGenerator(fn) {
-  return function() {
-    var gen = fn.apply(this, arguments);
-    return new Promise(function(resolve, reject) {
-      function step(key, arg) {
-        try {
-          var info = gen[key](arg);
-          var value = info.value;
-        } catch (error) {
-          reject(error);
-          return;
-        }
-        if (info.done) {
-          resolve(value);
-        } else {
-          return Promise.resolve(value).then(function(value) {
-            step('next', value);
-          }, function(err) {
-            step('throw', err);
-          });
-        }
-      }
-
-      return step('next');
-    });
-  };
-}
+function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
 var axios = require('axios');
 var Forecast = require('./index');
 
 jest.mock('axios');
 
-jest.mock('./toDateString', function() {
-  return function() {
+jest.mock('./toDateString', function () {
+  return function () {
     return 'mock__dateString';
   };
 });
 
 var MOCK_CREDENTIALS = {
   accountId: 'mock__accountId',
-  token: 'mock__token',
+  token: 'mock__token'
 };
 
-describe('forecast-promise', function() {
-  it('crashes with no input', function() {
-    expect(function() {
+describe('forecast-promise', function () {
+  it('crashes with no input', function () {
+    expect(function () {
       return new Forecast();
     }).toThrow('Forecast module requires accountId and token to be configured.');
   });
 
-  it('crashes with only one input', function() {
-    expect(function() {
+  it('crashes with only one input', function () {
+    expect(function () {
       return new Forecast({ accountId: MOCK_CREDENTIALS.accountId });
     }).toThrow('Forecast module requires accountId and token to be configured.');
 
-    expect(function() {
+    expect(function () {
       return new Forecast({ token: MOCK_CREDENTIALS.token });
     }).toThrow('Forecast module requires accountId and token to be configured.');
   });
 
-  it('instantiates axios with valid input', function() {
-    axios.create.mockImplementation(function(args) {
+  it('instantiates axios with valid input', function () {
+    axios.create.mockImplementation(function (args) {
       return args;
     });
     var f = new Forecast(MOCK_CREDENTIALS);
@@ -81,8 +48,8 @@ describe('forecast-promise', function() {
       headers: {
         Authorization: 'Bearer ' + MOCK_CREDENTIALS.token,
         'Forecast-Account-Id': MOCK_CREDENTIALS.accountId,
-        'User-Agent': 'https://www.npmjs.com/package/forecast-promise',
-      },
+        'User-Agent': 'https://www.npmjs.com/package/forecast-promise'
+      }
     });
   });
 
@@ -92,7 +59,7 @@ describe('forecast-promise', function() {
       while (1) {
         switch (_context2.prev = _context2.next) {
           case 0:
-            get = jest.fn().mockImplementation(function() {
+            get = jest.fn().mockImplementation(function () {
               var _ref2 = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(url) {
                 return regeneratorRuntime.wrap(function _callee$(_context) {
                   while (1) {
@@ -104,12 +71,12 @@ describe('forecast-promise', function() {
                         }
 
                         return _context.abrupt('return', {
-                          data: { current_user: 'mock__user' },
+                          data: { current_user: 'mock__user' }
                         });
 
                       case 2:
                         return _context.abrupt('return', {
-                          data: _defineProperty({}, url.substring(1), url),
+                          data: _defineProperty({}, url.substring(1), url)
                         });
 
                       case 3:
@@ -120,7 +87,7 @@ describe('forecast-promise', function() {
                 }, _callee, undefined);
               }));
 
-              return function(_x) {
+              return function (_x) {
                 return _ref2.apply(this, arguments);
               };
             }());
@@ -138,7 +105,7 @@ describe('forecast-promise', function() {
             _context2.next = 9;
             return f.projects({
               startDate: 'mock__input',
-              endDate: 'mock__input',
+              endDate: 'mock__input'
             });
 
           case 9:

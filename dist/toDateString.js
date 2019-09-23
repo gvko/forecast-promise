@@ -2,7 +2,7 @@
 
 var moment = require('moment');
 
-module.exports = function(obj) {
+module.exports = function (obj) {
   var date = void 0;
 
   if (typeof obj === 'string') {

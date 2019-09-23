@@ -2,7 +2,7 @@
 
 var toDateString = require('./toDateString');
 
-module.exports = function(options) {
+module.exports = function (options) {
   var qs = {};
 
   if (options.startDate) qs.start_date = toDateString(options.startDate);
